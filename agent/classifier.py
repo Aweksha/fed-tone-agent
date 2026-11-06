@@ -279,6 +279,21 @@ def classify_speech(url: str) -> ToneResult:
     speech_text = fetch_full_text(url)
 
     print(f"Retrieved {len(speech_text)} characters.")
+
+    return classify_text(speech_text)
+
+
+def classify_text(speech_text: str) -> ToneResult:
+    """
+    Classify the tone of already-fetched speech text.
+
+    Args:
+        speech_text: Full text of a Federal Reserve speech.
+
+    Returns:
+        Validated ToneResult object with verified evidence.
+    """
+
     print("Analyzing monetary policy tone with Groq...\n")
 
     client = get_groq_client()
