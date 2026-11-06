@@ -167,5 +167,18 @@
     "confidence": 0.96,
     "reason": "The speech discusses bank regulatory and supervisory reforms without addressing monetary policy, interest rates, inflation, or the dual mandate.",
     "evidence": "Today I will discuss the work we have under way to modernize the bank regulatory and supervision framework. These frameworks are the foundation for the long-term stability and success of the banking system, and for community banks around the country."
+  },
+  {
+    "id": "https://www.federalreserve.gov/newsevents/speech/bowman20261014a.htm",
+    "title": "Supervisory Modernization After Silicon Valley Bank",
+    "speaker": "Bowman",
+    "date": "2026-10-15",
+    "link": "https://www.federalreserve.gov/newsevents/speech/bowman20261014a.htm",
+    "relevant": false,
+    "label": "not applicable",
+    "score": null,
+    "confidence": null,
+    "reason": "Skipped by keyword screen: no monetary policy terms.",
+    "evidence": ""
   }
 ]
