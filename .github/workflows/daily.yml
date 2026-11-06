@@ -18,9 +18,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -40,9 +40,9 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -67,3 +67,42 @@ jobs:
             git commit -m "Update tracked speeches [skip ci]"
             git push
           fi
+
+  deploy-site:
+    # Publish the website after tests pass: on pushes to main, and after
+    # each agent run (so the page picks up the newly committed data).
+    needs: [test, run-agent]
+    if: >-
+      always() &&
+      needs.test.result == 'success' &&
+      (needs.run-agent.result == 'success' || needs.run-agent.result == 'skipped') &&
+      github.event_name != 'pull_request' &&
+      github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Check out the latest main, which includes the agent's data commit.
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site/data
+          cp -r site/. _site/
+          cp data/tone.json _site/data/tone.json
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
