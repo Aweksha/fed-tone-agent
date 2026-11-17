@@ -180,5 +180,18 @@
     "confidence": null,
     "reason": "Skipped by keyword screen: no monetary policy terms.",
     "evidence": ""
+  },
+  {
+    "id": "https://www.federalreserve.gov/newsevents/speech/waller20261117a.htm",
+    "title": "Considerations at the Intersection of Payments and Tokenized Markets",
+    "speaker": "Waller",
+    "date": "2026-11-17",
+    "link": "https://www.federalreserve.gov/newsevents/speech/waller20261117a.htm",
+    "relevant": false,
+    "label": "not applicable",
+    "score": null,
+    "confidence": null,
+    "reason": "Skipped by keyword screen: no monetary policy terms.",
+    "evidence": ""
   }
 ]
